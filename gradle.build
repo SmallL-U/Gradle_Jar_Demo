@@ -1,0 +1,40 @@
+plugins {
+    id 'java'
+}
+
+group 'skip'
+version 'skip'
+
+configurations {
+    extra
+}
+
+repositories {
+    mavenCentral()
+}
+
+jar {
+    from {
+        configurations.extra.collect {it.isDirectory() ? it : zipTree(it)}
+    }
+    exclude("**/LICENSE")
+    exclude("**/NOTICE")
+    exclude("**/module-info.class")
+}
+
+dependencies {
+//    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
+//    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
+    implementation 'com.github.azbh111:spigot-1.12.2:R@jar'
+    implementation 'org.projectlombok:lombok:1.18.24'
+    annotationProcessor 'org.projectlombok:lombok:1.18.24'
+    extra 'com.fasterxml.jackson.core:jackson-databind:2.13.3@jar'
+    extra 'com.fasterxml.jackson.core:jackson-core:2.13.3@jar'
+    extra 'com.fasterxml.jackson.core:jackson-annotations:2.13.3@jar'
+    extra 'redis.clients:jedis:4.2.3'
+    configurations.implementation.extendsFrom(configurations.extra)
+}
+
+test {
+    useJUnitPlatform()
+}
