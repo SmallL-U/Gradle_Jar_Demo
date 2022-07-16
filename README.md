@@ -1,0 +1,4 @@
+# Gradle_Jar_Demo
+本示例自定义对依赖的引入操作
+jar任务中对自定义的extra引入进行导入
+最终生成full-release(对于extra引入的依赖
